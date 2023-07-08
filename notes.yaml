@@ -1,0 +1,148 @@
+twitter.com: 
+
+./i/api/2/guide.json:
+    globalObects.tweets: Object.\{Snowflake, Tweet?\}
+
+./i/api/2/all.json:
+    globalObjects:
+        tweets: Object.\{Snowflake, Tweet?\}
+        users: Object.\{Snowflake, TwitterUser?\}
+
+./i/api/1.1/recommendations.json: Array:
+    token: base-64 token
+    ...<TwitterUser?>
+
+./i/api/1.1/branch/init.json:
+    USER DATA, DO NOT COLLECT THIS
+
+./i/api/2/guide.json:
+    globalObjects:
+        tweets: Object.\{Snowflake, Tweet?\},
+        users: Object.\{Snowflake, TwitterUser?\},
+        media: Object.\{Snowflake, TwitterMedia?\}
+        moments: Object
+        cards: Object
+        places: Object
+        broadcasts: Object
+        topics: Object
+        lists: Object
+
+./i/api/graphql/{???}/UserTweets:
+        queryString:
+            variables={json}
+            features={json}
+            fieldToggles={json}
+    data.user.result.timeline_v2.timeline.instructions: Array:
+        -   type: "TimelineAddEntries"
+            entries:
+                entryId: "tweet-"+Snowflake
+                sortIndex: Snowflake
+                content:
+                    itemContent:
+                    -   itemType: "TimelineTweet"
+                        __typename: "TimelineTweet"
+                        tweet_results:
+                            tweetDisplayType: "Tweet"
+                            result:
+                                rest_id: Snowflake
+                                legacy:
+                                    created_at: Timestamp
+                                    conversation_id_str: Snowflake
+                                    display_text_range: StringIndex
+                                    entities: Entities
+                                    extended_entities: Entities?
+                                    favorite_count: Number
+                                    full_text: String
+                                    is_quote_status: Boolean
+                                    lang: Lang_Abbrev
+                                    possibly_sensitive: Boolean
+                                    possibly_sensitive_editable: Boolean
+                                    quote_count: Number
+                                    reply_count: Number
+                                    retweet_count: Number
+                                    user_id_str: Snowflake
+                                    id_str: Snowflake
+                                    retweeted_status_result.result: Tweet
+                        tweetDisplayType: "Tweet"     
+                    clientEventInfo:
+                        component: "tweet"
+                        element: "tweet"
+
+                                
+
+
+        
+
+./i/api/graphql/\{???\}/UserMedia:
+    # TODO
+
+api.twitter.com:
+
+./1.1/acccount/settings.json:
+    USER DATA, DO NOT COLLECT THIS
+
+Types:
+    GlobalObjects:
+        tweets~: Object.\{Snowflake, Tweet?\},
+        users~: Object.\{Snowflake, TwitterUser?\},
+        media~: Object.\{Snowflake, TwitterMedia?\}
+        moments~: Object
+        cards~: Object
+        places~: Object
+        broadcasts~: Object
+        topics~: Object
+        lists~: Object
+    Lang_Abbrev:
+    -   "ca"
+    Size:
+        h: Number
+        w: Number
+        resize:
+        -   "fit"
+        -   "crop"
+    Rectangle:
+        h: Number
+        w: Number
+        x: Number
+        y: Number
+    StringIndex: [Number, Number]
+    UserMention:
+        id_str: Snowflake
+        name: string
+        screen_name: string
+        indices: StringIndex
+    MediaFeatureTag:
+    -   user_id: Snowflake
+        name: String
+        screen_name: String
+        type: "user"
+    Entities:
+        media: Array:
+            -   display_url: URL
+                expanded_url: URL
+                id_str: Snowflake
+                indices: StringIndex
+                media_url_https: URL
+                source_status_id_str: Snowflake
+                source_user_id_str: Snowflake
+                type: "photo"
+                url: URL
+                features:
+                    all.tags: MediaFeatureTag[]
+                    large.faces: []
+                    medium.faces: []
+                    small.faces: []
+                    orig.faces: []
+                sizes:
+                    large: Size
+                    medium: Size
+                    small: Size
+                    thumb: Size
+                original_info:
+                    height: Number
+                    width: Number
+                    focus_rects: Array<Rectangle>
+                user_mentions: UserMention[]
+                urls: # TODO
+                hashtags: # TODO
+                symbols: # TODO
